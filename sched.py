@@ -41,7 +41,7 @@ class Process:
     time_left=0
     time_total_needed=0
 
-    time_at_last_execute=0
+    time_at_last_execute=0 # when last wait started
     waiting_time=0
 
     start_time=-1
@@ -55,6 +55,7 @@ class Process:
         self.arrival = int(vec[1])
         self.time_total_needed = int(vec[2])
         self.time_left = self.time_total_needed
+        self.time_at_last_execute = self.arrival
 
     def print(self):
         print("PID:", self.pid," Arrival time:", self.arrival,"ms  Time left:", self.time_left,"/",self.time_total_needed,"ms") 
