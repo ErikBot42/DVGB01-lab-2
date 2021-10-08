@@ -2,6 +2,8 @@
 
 Requires python3
 
-`chmod +x sched.py` and `./sched.py` (assuming `/usr/bin/python3` containa a python3 installation)
+## Run with
+
+`chmod +x sched.py` and `./sched.py` (assuming `/usr/bin/python3` contains a python3 installation)
 
 or `python3 sched.py`
