@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-
+# Written by Erik Magnusson and Rasmus Angeleni Gjein
 
 import sys
 import operator
