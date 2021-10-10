@@ -10,8 +10,6 @@ def print_usage():
     print("Usage:")
     print("./sched.py -f <process information file> -a [FCFS | SJF | RR] [-q <time quantum>]")
 
-#print("num args", len(sys.argv))
-
 algorithms = ["FCFS", "SJF", "RR"]
 
 # read CLI arguments
@@ -39,6 +37,7 @@ print("-------------------")
 
 # waiting time = turnaround - execute time
 
+# pad number
 def num_format(number):
     return '{0: <2}'.format(str(number))
 
@@ -50,8 +49,6 @@ class Process:
    
     time_at_done=0 # time at last stopped processing
     waiting_time=0
-
-    #start_time=-1
 
     # turnaround = from arrival to done
     def turnAroundTime(self):
@@ -77,8 +74,6 @@ class Process:
         self.waiting_time+=currentTime-self.time_at_done
         self.time_at_done=currentTime+executionTime
         self.time_left-=executionTime
-        #if self.start_time < 0:
-        #    self.start_time = currentTime
 
         print("Running PID:", self.pid,"for",executionTime,"ms  at time",currentTime)
 
@@ -90,8 +85,9 @@ def process_wait(targetTime, currentTime):
     return time+currentTime
 
 def too_late(process):
-    print("PID", process.pid,"is too late to be run")
+    print("PID", process.pid,"arrived too late to be run")
 
+# read file to process objects
 with open(filename) as file:
     lines = file.readlines()
     for line in lines:
@@ -110,6 +106,7 @@ if algorithm == "FCFS":
             currentTime = process_wait(process.arrival, currentTime)
         process.execute(currentTime, executionTime)
         currentTime+=executionTime
+
 elif algorithm == "SJF":
     byBurstTime = sorted(processes, key=operator.attrgetter("time_total_needed"))
     processSet = copy.copy(byBurstTime)
@@ -142,6 +139,7 @@ for process in processes:
     process.print()
 print("-------------------")
 
+# calc average and print averages
 sum_wait_time=0
 sum_turnaround_time=0
 for process in processes:
